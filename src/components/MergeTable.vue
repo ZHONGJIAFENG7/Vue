@@ -123,7 +123,12 @@ export default {
             const array2 = currentRow[columnsArray[j]];
             // 判断当前元素与上一个元素是否相同
             // NOTE: 解决行列单元格同时合并同一个单元格问题，加入行已经经过合并，则列不进行合并
-            if (array1 && array2 && array1 === array2) {
+            if (
+              array1 &&
+              array2 &&
+              array1 === array2 &&
+              this.rowSpanInst[columnsArray[j]][i] === 1
+            ) {
               this.colSpanInst[i][this.colPos[i]] += 1;
               this.colSpanInst[i][columnsArray[j]] = 0;
             } else {
