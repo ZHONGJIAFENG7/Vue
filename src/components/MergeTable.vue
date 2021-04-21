@@ -14,8 +14,8 @@ export default {
         },
         {
           month: 'February',
-          frontEnd: 'Express',
-          backEnd: 'Vue',
+          frontEnd: 'Vue',
+          backEnd: 'Java',
           savings: '$200'
         },
         { month: 'March', frontEnd: 'React', backEnd: 'Koa', savings: '$200' },
