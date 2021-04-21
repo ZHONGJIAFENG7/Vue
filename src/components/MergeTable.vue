@@ -14,8 +14,8 @@ export default {
         },
         {
           month: 'February',
-          frontEnd: 'Vue',
-          backEnd: 'Java',
+          frontEnd: 'Express',
+          backEnd: 'Vue',
           savings: '$200'
         },
         { month: 'March', frontEnd: 'React', backEnd: 'Koa', savings: '$200' },
@@ -127,6 +127,7 @@ export default {
               array1 &&
               array2 &&
               array1 === array2 &&
+              this.rowSpanInst[columnsArray[j - 1]][i] === 1 &&
               this.rowSpanInst[columnsArray[j]][i] === 1
             ) {
               this.colSpanInst[i][this.colPos[i]] += 1;
