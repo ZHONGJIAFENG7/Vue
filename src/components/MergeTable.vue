@@ -63,7 +63,6 @@ export default {
   },
   data() {
     return {
-      hideBottomBorder: false, // 监听滚动条是否滚到最后
       rowSpanInst: {}, // 记录每一列的合并信息
       rowPos: {}, // 记录每一列的位置，如果前后两项不合并在位置后移
       colSpanInst: [], // 记录每一行的合并信息
@@ -72,18 +71,6 @@ export default {
   },
   created() {
     this.init();
-    const scrollListener = e => {
-      const scrollHeight = e.target.scrollHeight;
-      const scrollTop = e.target.scrollTop;
-      const offsetHeight = e.target.offsetHeight;
-      this.hideBottomBorder = offsetHeight + scrollTop >= scrollHeight;
-    };
-    this.$on('hook:mounted', () =>
-      this.$refs['tb-body'].addEventListener('scroll', scrollListener)
-    );
-    this.$on('hook:beforeDestroy', () => {
-      this.$refs['tb-body'].removeEventListener('scroll', scrollListener);
-    });
   },
   methods: {
     init() {
@@ -169,10 +156,7 @@ export default {
   },
   render(h) {
     return (
-      <div
-        staticClass="tb-container"
-        class={{ 'hide-border-bottom': this.hideBottomBorder }}
-      >
+      <div staticClass="tb-container">
         <div class="tb-header">
           <table class="raw-table">
             <thead>
@@ -229,16 +213,35 @@ export default {
   display: none;
 }
 
-.hide-border-bottom {
-  border-bottom: none !important;
-}
-
 .tb-container {
-  border: 1px solid #dee2e6;
+  border-top: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
   margin-bottom: 10px;
   height: 300px;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.tb-container::before {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  content: '';
+  position: absolute;
+  background-color: #dee2e6;
+  z-index: 1;
+}
+.tb-container::after {
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  content: '';
+  position: absolute;
+  background-color: #dee2e6;
+  z-index: 1;
 }
 
 .raw-table {
