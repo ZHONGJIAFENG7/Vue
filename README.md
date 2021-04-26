@@ -1,4 +1,4 @@
-# merge-table
+# Vue Project
 
 > A Vue.js project
 
