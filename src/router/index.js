@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import MergeTable from '@/components/MergeTable';
-import Dialog from '@/components/Dialog.vue';
+import Dialog from '@/views/Dialog/Dialog.vue';
 
 Vue.use(Router);
 
