@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th>Month</th>
-        <th>Savings</th>
+        <th>Desc</th>
       </tr>
     </thead>
     <tbody>
@@ -51,7 +51,6 @@ table {
     overflow-x: hidden;
     td {
       text-align: center;
-      background: rgba(43, 104, 212, 0.15);
       width: 150px;
       font-size: 16px;
     }
