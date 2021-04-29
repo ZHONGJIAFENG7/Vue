@@ -68,9 +68,6 @@ export default {
       };
     }
   },
-  mounted() {
-    console.log(this.$closeDialog);
-  },
   methods: {
     closeDialog() {
       Object.assign(this.$data, this.$options.data());
