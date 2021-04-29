@@ -12,11 +12,12 @@
         <td>
           <custom-text>
             hello, world!hello, world!hello, world!hello, world!hello, world!
+            hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!hello, world!
           </custom-text>
         </td>
       </tr>
       <tr>
-        <td>January</td>
+        <td>Feburary</td>
         <td>
           <custom-text>
             hello, world
@@ -28,21 +29,32 @@
 </template>
 
 <script>
-import CustomText from '../../components/Text/CustomText.vue';
-export default {
-  components: { CustomText }
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
 table {
-  // width: 100%;
-  // table-layout: fixed;
+  border-collapse: separate;
   border-spacing: 0;
-}
-tbody {
-  td {
-    width: 20px;
+  font-size: 16px;
+  text-align: center;
+  table-layout: fixed;
+
+  thead,
+  tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  tbody {
+    overflow-x: hidden;
+    td {
+      text-align: center;
+      background: rgba(43, 104, 212, 0.15);
+      width: 150px;
+      font-size: 16px;
+    }
   }
 }
 </style>
