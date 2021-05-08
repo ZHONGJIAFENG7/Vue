@@ -7,6 +7,8 @@ import {
   Dialog,
   Button,
   Select,
+  Table,
+  TableColumn,
   Input,
   Option,
   Tree,
@@ -17,6 +19,7 @@ import CustomDialog from './components/Dialog/index.js';
 import CustomText from './components/Text/CustomText.vue';
 import CustomTreeSelect from './components/TreeSelect/custom-tree-select.vue';
 import ListScroll from './components/ListScroll/ListScroll.vue';
+import CustomTable from './components/Table/customTable';
 
 Vue.config.productionTip = false;
 
@@ -27,10 +30,13 @@ Vue.component(Input.name, Input);
 Vue.component(Option.name, Option);
 Vue.component(Tree.name, Tree);
 Vue.component(Tooltip.name, Tooltip);
+Vue.component(CustomTable.name, CustomTable);
 Vue.component(CustomTreeSelect.name, CustomTreeSelect);
 Vue.component(CustomText.name, CustomText);
 Vue.component(ListScroll.name, ListScroll);
 Vue.component(CustomText.name, CustomText);
+Vue.use(Table);
+Vue.use(TableColumn);
 Vue.use(CustomDialog);
 
 /* eslint-disable no-new */

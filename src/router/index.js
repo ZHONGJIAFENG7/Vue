@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import MergeTable from '@/components/MergeTable';
 import Dialog from '@/views/dialog/dialog.vue';
+import Table from '@/views/table/table.vue';
 import Text from '@/views/text/text.vue';
 import TreeSelect from '@/views/select/treeSelect.vue';
 import ListScroll from '@/views/listScroll/listScroll.vue';
@@ -19,6 +20,11 @@ export default new Router({
       path: '/dialog',
       name: 'dialog',
       component: Dialog
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: Table
     },
     {
       path: '/text',

@@ -42,10 +42,10 @@ export default {
               return <div>自定义组件</div>;
             }
           }
-        },
-        // 模版中的元素需要对应的有 slot="opt" 属性
-        { slot: 'opt1', label: '输入', align: 'center' },
-        { slot: 'opt', label: '操作', align: 'center' }
+        }
+        // // 模版中的元素需要对应的有 slot="opt" 属性
+        // { slot: 'opt1', label: '输入', align: 'center' },
+        // { slot: 'opt', label: '操作', align: 'center' }
       ]
     },
     loading: {
@@ -57,9 +57,42 @@ export default {
       default: () => {}
     }
   },
+  methods: {
+    getAttrs(h, column) {
+      const self = this;
+      const scopedSlots =
+        column.slot || column.render || column.component
+          ? {
+              scopedSlots: {
+                default(scope) {
+                  const exportVal = {
+                    column: scope.column,
+                    $index: scope.$index,
+                    row: scope.row
+                  };
+                  if (column.slot) {
+                    return self.$scopedSlots[column.slot](exportVal);
+                  } else if (column.render) {
+                    return column.render(h, exportVal);
+                  } else if (column.component) {
+                    return h(column.component);
+                  }
+                }
+              }
+            }
+          : {};
+
+      return {
+        ...scopedSlots,
+        attrs: {
+          ...column,
+          'show-overflow-tooltip': true,
+          align: column.align || 'center'
+        }
+      };
+    }
+  },
   render(h) {
-    const self = this;
-    // console.log(self.$attrs);
     const directives = {
       directives: [{ name: 'loading', value: this.loading }]
     };
@@ -73,48 +106,23 @@ export default {
 
     return (
       <el-table
-        {...{ attrs: self.$attrs }}
-        {...{ props: self.$props }}
+        {...{ attrs: this.$attrs }}
+        {...{ props: this.$props }}
         {...directives}
         {...listeners}
         class={{ 'base-table': true, 'mb-2': true }}
         ref="table"
       >
         {this.columns.map(column => {
-          const scopedSlots =
-            column.slot || column.render || column.component
-              ? {
-                  scopedSlots: {
-                    default(scope) {
-                      const exportVal = {
-                        column: scope.column,
-                        $index: scope.$index,
-                        row: scope.row
-                      };
-                      if (column.slot) {
-                        return self.$scopedSlots[column.slot](exportVal);
-                      } else if (column.render) {
-                        return column.render(h, exportVal);
-                      } else if (column.component) {
-                        return <column.component />;
-                      }
-                    }
-                  }
-                }
-              : {};
-
           return (
-            <el-table-column
-              key={column.prop}
-              {...{
-                attrs: {
-                  ...column,
-                  'show-overflow-tooltip': true,
-                  align: column.align || 'center'
-                }
-              }}
-              {...scopedSlots}
-            />
+            <el-table-column key={column.prop} {...this.getAttrs(h, column)}>
+              {column.children &&
+                column.children.map(c => {
+                  return (
+                    <el-table-column key={c.prop} {...this.getAttrs(h, c)} />
+                  );
+                })}
+            </el-table-column>
           );
         })}
       </el-table>
